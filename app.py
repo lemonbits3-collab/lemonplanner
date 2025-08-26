@@ -6,9 +6,9 @@ from datetime import datetime
 st.set_page_config(
     page_title="LemonPlanner",
     page_icon="🍋",
-    layout="wide",   # <- Wichtig: wide, damit die Spalten nebeneinander passen
+    layout="wide",
+    initial_sidebar_state="expanded",  # <— Sidebar beim Start offen
 )
-
 # ---- Heutiges Datum (Deutsch) ----
 WOCHENTAGE = ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"]
 heute = datetime.now()
