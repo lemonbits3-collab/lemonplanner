@@ -6,7 +6,7 @@ from datetime import datetime
 st.set_page_config(
     page_title="LemonPlanner",
     page_icon="🍋",
-    layout="wide",   # <— HIER ändern
+    layout="wide",   # <- Wichtig: wide, damit die Spalten nebeneinander passen
 )
 
 # ---- Heutiges Datum (Deutsch) ----
@@ -47,7 +47,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ---- Karten nebeneinander ----
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns(3, gap="large")
 
 with col1:
     st.markdown("""
