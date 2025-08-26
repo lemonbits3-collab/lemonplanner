@@ -7,20 +7,21 @@ st.set_page_config(
     page_title="LemonPlanner",
     page_icon="🍋",
     layout="wide",
-    initial_sidebar_state="expanded",  # <— Sidebar beim Start offen
+    initial_sidebar_state="expanded",
 )
+
 # ---- Heutiges Datum (Deutsch) ----
 WOCHENTAGE = ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"]
 heute = datetime.now()
 datum = f"{WOCHENTAGE[heute.weekday()]}, {heute.day:02d}.{heute.month:02d}.{heute.year}"
 
-# ---- Dark Theme Styling ----
+# ---- Dark Theme Styling (leicht) ----
 st.markdown("""
 <style>
 :root { --bg:#0f1115; --panel:#171923; --text:#e7e7e7; --muted:#b6b6c1; --border:#2a2f3a; }
 html, body, [data-testid="stAppViewContainer"] { background: var(--bg); color: var(--text); }
 h1,h2,h3 { color: var(--text); }
-.hero { text-align:center; margin-top: 0.5rem; margin-bottom: 2rem; }
+.hero { text-align:center; margin-top: .5rem; margin-bottom: 1.8rem; }
 .hero-title { font-size: 2.2rem; font-weight: 800; }
 .hero-sub { color: var(--muted); font-size: 1rem; }
 .hero-date { margin-top: .5rem; font-weight: 600; color: #d6d6dc; }
@@ -37,7 +38,7 @@ h1,h2,h3 { color: var(--text); }
 </style>
 """, unsafe_allow_html=True)
 
-# ---- Hero Section ----
+# ---- Hero ----
 st.markdown(f"""
 <div class="hero">
   <div class="hero-title">📂 LemonPlanner – dein Raum für Gedanken & Pläne</div>
@@ -46,7 +47,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ---- Karten nebeneinander ----
+# ---- Karten + Links zu Seiten ----
 col1, col2, col3 = st.columns(3, gap="large")
 
 with col1:
@@ -57,7 +58,7 @@ with col1:
       <div class="card-desc">Sammle Gedanken & Ideen.</div>
     </div>
     """, unsafe_allow_html=True)
-    st.button("Öffnen", key="btn_notes")
+    st.page_link("pages/01_Notizen.py", label="Öffnen", icon="📝")
 
 with col2:
     st.markdown("""
@@ -67,7 +68,7 @@ with col2:
       <div class="card-desc">Kommt bald.</div>
     </div>
     """, unsafe_allow_html=True)
-    st.button("Bald verfügbar", key="btn_tasks", disabled=True)
+    st.page_link("pages/02_Aufgaben.py", label="Zur Seite", icon="✅")
 
 with col3:
     st.markdown("""
@@ -77,7 +78,7 @@ with col3:
       <div class="card-desc">Kommt bald.</div>
     </div>
     """, unsafe_allow_html=True)
-    st.button("Bald verfügbar", key="btn_calendar", disabled=True)
+    st.page_link("pages/03_Kalender.py", label="Zur Seite", icon="📅")
 
 # ---- Footer ----
 st.markdown('<div class="footer">MVP · Fokus auf Übersicht</div>', unsafe_allow_html=True)
