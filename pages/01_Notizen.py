@@ -23,19 +23,27 @@ st.write("---")
 # --- Notizen anzeigen ---
 st.subheader("Gespeicherte Notizen")
 
+def _delete(note_id: int, title: str):
+    db.delete_note(note_id)
+    st.toast(f"Notiz '{title}' gelöscht.")
+    st.rerun()  # <- neuer Name statt experimental_rerun
+
 notes = db.list_notes()
 if notes:
     for n in notes:
-        with st.expander(f"📌 {n[1]}  —  {n[5]}"):
-            st.write(n[2])  # Inhalt
-            if n[3]:
-                st.caption(f"Tags: {n[3]}")
-            if n[4]:
-                st.caption(f"Ordner: {n[4]}")
-            # Löschen
-            if st.button("🗑️ Löschen", key=f"del{n[0]}"):
-                db.delete_note(n[0])
-                st.warning(f"Notiz '{n[1]}' gelöscht.")
-                st.experimental_rerun()
+        note_id, title, content, tags, folder, created = n
+        with st.expander(f"📌 {title}  —  {created}"):
+            st.write(content)
+            if tags:
+                st.caption(f"Tags: {tags}")
+            if folder:
+                st.caption(f"Ordner: {folder}")
+
+            st.button(
+                "🗑️ Löschen",
+                key=f"del-{note_id}",
+                on_click=_delete,
+                args=(note_id, title),
+            )
 else:
     st.info("Noch keine Notizen vorhanden.")
