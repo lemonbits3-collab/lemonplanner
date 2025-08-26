@@ -6,7 +6,7 @@ from datetime import datetime
 st.set_page_config(
     page_title="LemonPlanner",
     page_icon="🍋",
-    layout="centered",
+    layout="wide",   # <— HIER ändern
 )
 
 # ---- Heutiges Datum (Deutsch) ----
